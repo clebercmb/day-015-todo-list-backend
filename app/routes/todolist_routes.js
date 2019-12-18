@@ -50,6 +50,19 @@ module.exports = function(app, db) {
         });  
     });
 
+
+    app.get('/todolist/', (req, res) => {    
+    
+        db.collection("todolist").find().toArray((err, item) => {
+            if (err) {
+                res.send({'error':'An error has occurred'});      
+            } else { 
+                console.log(item)
+                res.send(item)
+            }
+        }) 
+    });
+
     app.post('/todolist', (req, res) => {
         const note = { 
             //text: req.body.body, 
